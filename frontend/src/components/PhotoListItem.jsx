@@ -5,23 +5,21 @@ const PhotoListItem = (props) => {
   const data = props.data;
 
   return (
-    <section key={data.id}>
-      <section>
-        <img src={data.imageSource}/>
-      </section>
-      <section>
-        <section>
-          <img src={data.profile}/>
-        </section>
-        <section>
-          <section>
-            {data.username}
-          </section>
-          <section>
-            {`${data.location.city}, ${data.location.country}`}
-          </section>
-        </section>
-      </section>
+    <section key={data.id} className="photo-list__item">
+      <div>
+        <img className="photo-list__image" src={data.imageSource}/>
+      </div>
+      <div className="photo-list__user-details ">
+        <div >
+          <img className="photo-list__user-profile" src={data.profile}/>
+        </div>
+        <div >
+          <div className="photo-list__user-info">{data.username}
+          </div>
+          <div className="photo-list__user-info photo-list__user-location">{`${data.location.city}, ${data.location.country}`}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
