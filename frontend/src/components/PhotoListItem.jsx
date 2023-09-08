@@ -9,14 +9,14 @@ const PhotoListItem = (props) => {
     <section className="photo-list__item">
       <div>
         <PhotoFavButton/>
-        <img className="photo-list__image" src={data.imageSource}/>
+        <img className="photo-list__image" src={data.urls.regular}/>
       </div>
       <div className="photo-list__user-details ">
         <div >
-          <img className="photo-list__user-profile" src={data.profile}/>
+          <img className="photo-list__user-profile" src={data.user.profile}/>
         </div>
         <div >
-          <div className="photo-list__user-info">{data.username}
+          <div className="photo-list__user-info">{data.user.name}
           </div>
           <div className="photo-list__user-info photo-list__user-location">{`${data.location.city}, ${data.location.country}`}
           </div>
