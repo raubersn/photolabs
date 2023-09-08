@@ -5,7 +5,7 @@ const PhotoListItem = (props) => {
   const data = props.data;
 
   return (
-    <section key={data.id} className="photo-list__item">
+    <section className="photo-list__item">
       <div>
         <img className="photo-list__image" src={data.imageSource}/>
       </div>
