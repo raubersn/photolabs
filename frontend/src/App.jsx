@@ -1,6 +1,7 @@
 import React from 'react';
+import TopNavigation from 'components/TopNavigationBar';
+import TopicList from 'components/TopicList';
 import PhotoList from 'components/PhotoList';
-import TopicListItem from 'components/TopicListItem';
 import './App.scss';
 
 const sampleDataForPhotoList = [
@@ -57,12 +58,32 @@ const sampleDataForPhotoList = [
   },
 ];
 
+const sampleDataForTopicList = [
+  {
+    id: "1",
+    slug: "topic-1",
+    title: "Nature",
+  },
+  {
+    id: "2",
+    slug: "topic-2",
+    title: "Travel",
+  },
+  {
+    id: "3",
+    slug: "topic-3",
+    title: "People",
+  },
+];
+
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
     <div className="App">
-      <TopicListItem/>
-      <PhotoList photoData={sampleDataForPhotoList}/>
+          <TopNavigation topicData={sampleDataForTopicList}/>
+          <main>      
+          <PhotoList photoData={sampleDataForPhotoList}/>
+        </main>
     </div>
   );
 };
