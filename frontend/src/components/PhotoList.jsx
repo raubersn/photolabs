@@ -2,10 +2,10 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
-const PhotoList = (props) => {
+const PhotoList = ({ photos }) => {
   return (
     <ul className="photo-list">
-      {props.photoData.map(x => <li key={x.id}><PhotoListItem data={x}/></li>)}
+      {photos.map(x => <li key={x.id}><PhotoListItem photo={x}/></li>)}
     </ul>
   );
 };
