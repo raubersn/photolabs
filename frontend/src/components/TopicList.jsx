@@ -1,5 +1,7 @@
 import React from "react";
 import TopicListItem from "./TopicListItem";
+
+import FavBadge from './FavBadge';
 import "../styles/TopicList.scss";
 
 const TopicList = (props) => {
@@ -7,6 +9,7 @@ const TopicList = (props) => {
     <div className="top-nav-bar__topic-list">
       {props.topicData.map(x => <TopicListItem key={x.id} topic={x} />)}
     </div>
+    
   );
 };
 
