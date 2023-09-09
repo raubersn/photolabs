@@ -3,12 +3,12 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton() {
-  const [getFavorite, setFavorite] = useState(false);
+  const [getFavourite, setFavourite] = useState(false);
 
   return (
-    <div className={`photo-list__fav-icon`} onClick={() => setFavorite(!getFavorite)}>
+    <div className={`photo-list__fav-icon`} onClick={() => setFavourite(!getFavourite)}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={getFavorite} />
+        <FavIcon selected={getFavourite} />
       </div>
     </div>
   );
