@@ -1,7 +1,5 @@
 import React from "react";
 import TopicListItem from "./TopicListItem";
-
-import FavBadge from './FavBadge';
 import "../styles/TopicList.scss";
 
 const TopicList = (props) => {

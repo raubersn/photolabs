@@ -1,8 +1,5 @@
 import React from 'react';
-import TopNavigation from 'components/TopNavigationBar';
-import TopicList from 'components/TopicList';
-import FavBadge from 'components/FavBadge';
-import PhotoList from 'components/PhotoList';
+import HomeRoute from 'routes/HomeRoute';
 import './App.scss';
 
 const sampleDataForPhotoList = [
@@ -81,10 +78,7 @@ const sampleDataForTopicList = [
 const App = () => {
   return (
     <div className="App">
-      <TopNavigation topicData={sampleDataForTopicList}/>
-      <main>      
-        <PhotoList photoData={sampleDataForPhotoList}/>
-      </main>
+      <HomeRoute topicData={sampleDataForTopicList} photoData={sampleDataForPhotoList}/>
     </div>
   );
 };
