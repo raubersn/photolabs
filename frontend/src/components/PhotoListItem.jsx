@@ -9,7 +9,7 @@ const PhotoListItem = ({ photo, selected, favID, handleFavourites, photoDetails 
     <section className="photo-list__item">
       <div>
         <PhotoFavButton selected={selected} favID={favID} handleFavourites={handleFavourites}/>
-        <img className="photo-list__image" src={urls.regular} onClick={() => photoDetails(favID)}/>
+        <img className="photo-list__image" src={urls.regular} onClick={() => photoDetails(photo)}/>
       </div>
       <div className="photo-list__user-details ">
         <div >

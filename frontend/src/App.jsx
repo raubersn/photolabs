@@ -7,16 +7,16 @@ import topics from 'mocks/topics';
 import photos from 'mocks/photos';
 
 const App = () => {
-  const [getModal, setModal] = useState(0);
+  const [getModal, setModal] = useState(null);
 
-  const showModal = (photoID) => {
-    setModal(photoID);
+  const showModal = (photo) => {
+    setModal(photo);
   };
 
   return (
     <div className="App">
       <HomeRoute topics={topics} photos={photos} photoDetails={showModal}/>
-      {getModal && <PhotoDetailsModal closeModal={() => showModal(0)}/>}
+      {getModal && <PhotoDetailsModal photo={getModal} closeModal={() => showModal(null)}/>}
     </div>
   );
 };
