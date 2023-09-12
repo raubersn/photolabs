@@ -3,7 +3,7 @@ import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ topics, photos }) => {
+const HomeRoute = ({ topics, photos, photoDetails }) => {
   const [getFavourites, setFavourites] = useState(['1', '3', '4', '7', '8']);
 
   const handleFavourites = (favID, selected) => {
@@ -18,7 +18,7 @@ const HomeRoute = ({ topics, photos }) => {
   return (
     <div className="home-route">
       <TopNavigation topics={topics} isFavPhotoExist={(getFavourites.length > 0)}/>
-      <PhotoList photos={photos} favourites={getFavourites} handleFavourites={handleFavourites}/>
+      <PhotoList photos={photos} favourites={getFavourites} handleFavourites={handleFavourites} photoDetails={photoDetails}/>
     </div>
   );
 };
