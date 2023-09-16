@@ -26,7 +26,9 @@ const PhotoDetailsModal = ({
         handleFavourites={handleFavourites}
         favID={photo.id}
       />
-      <label className="photo-details-modal__header">Similar Photos</label>
+      <div>
+        <label className="photo-details-modal__header">Related Photos</label>
+      </div>
       <PhotoList
         photos={photo.similar_photos}
         favourites={favourites}
