@@ -10,6 +10,7 @@ const PhotoListItem = ({
   handleFavourites,
   photoDetails,
   modal,
+  dispatch,
 }) => {
   const { urls, user, location } = photo;
 
@@ -23,6 +24,7 @@ const PhotoListItem = ({
             selected={selected}
             favID={favID}
             handleFavourites={handleFavourites}
+            dispatch={dispatch}
           />
           {modal ? (
             <img className="photo-details-modal__image" src={urls.full} />
@@ -30,7 +32,7 @@ const PhotoListItem = ({
             <img
               className="photo-list__image"
               src={urls.regular}
-              onClick={() => photoDetails(photo)}
+              onClick={() => dispatch({ type: photoDetails, payload: photo })}
             />
           )}
         </div>
