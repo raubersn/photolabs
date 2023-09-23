@@ -4,17 +4,14 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import { useApplicationData, ACTIONS } from "hooks/useApplicationData";
 import "./App.scss";
 
-import topics from "mocks/topics";
-import photos from "mocks/photos";
-
 const App = () => {
   const { state, dispatch } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute
-        topics={topics}
-        photos={photos}
+        topics={state.topicData}
+        photos={state.photoData}
         favourites={state.favourites}
         dispatch={dispatch}
         photoDetails={ACTIONS.SELECT_PHOTO}

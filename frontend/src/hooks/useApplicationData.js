@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
@@ -11,32 +11,22 @@ export const ACTIONS = {
 
 const reducers = {
   FAV_PHOTO_ADDED(state, action) {
-    return {
-      favourites: [...state.favourites, action.payload],
-      modalPhoto: state.modalPhoto ? { ...state.modalPhoto } : null,
-    };
+    return { ...state, favourites: [...state.favourites, action.payload] };
   },
   FAV_PHOTO_REMOVED(state, action) {
     return {
+      ...state,
       favourites: state.favourites.filter((x) => x !== action.payload),
-      modalPhoto: state.modalPhoto ? { ...state.modalPhoto } : null,
     };
   },
   SET_PHOTO_DATA(state, action) {
-    return {
-      /* insert logic */
-    };
+    return { ...state, photoData: action.payload };
   },
   SET_TOPIC_DATA(state, action) {
-    return {
-      /* insert logic */
-    };
+    return { ...state, topicData: action.payload };
   },
   SELECT_PHOTO(state, action) {
-    return {
-      favourites: [...state.favourites],
-      modalPhoto: action.payload,
-    };
+    return { ...state, modalPhoto: action.payload };
   },
   DISPLAY_PHOTO_DETAILS(state, action) {
     return {
@@ -54,7 +44,23 @@ export const useApplicationData = (initial) => {
         `Tried to reduce with unsupported action type: ${action.type}`
       );
     }
-  }, initial || { favourites: [], modalPhoto: null });
+  }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null });
+
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+      );
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
+      );
+  }, []);
 
   return { state, dispatch };
 };
