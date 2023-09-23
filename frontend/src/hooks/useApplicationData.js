@@ -1,6 +1,11 @@
-import photos from "mocks/photos";
-import { formatWithCursor } from "prettier";
 import React, { useReducer, useEffect } from "react";
+import axios from "axios";
+
+const END_POINTS = {
+  GET_PHOTOS: "/api/photos",
+  GET_PHOTOS_BY_TOPICS: "/api/topics/photos/",
+  GET_TOPICS: "/api/topics",
+};
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
@@ -48,26 +53,30 @@ export const useApplicationData = (initial) => {
   }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null, filter: null });
 
   useEffect(() => {
-    fetch("/api/photos")
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+    axios
+      .get(END_POINTS.GET_PHOTOS)
+      .then((res) =>
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: res.data })
       );
   }, []);
 
   useEffect(() => {
-    fetch("/api/topics")
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
+    axios
+      .get(END_POINTS.GET_TOPICS)
+      .then((res) =>
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: res.data })
       );
   }, []);
 
   useEffect(() => {
-    fetch(state.filter ? `/api/topics/photos/${state.filter}` : "/api/photos")
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+    axios
+      .get(
+        state.filter
+          ? END_POINTS.GET_PHOTOS_BY_TOPICS + state.filter
+          : END_POINTS.GET_PHOTOS
+      )
+      .then((res) =>
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: res.data })
       );
   }, [state.filter]);
 
