@@ -14,6 +14,10 @@ const App = () => {
         photos={state.photoData}
         favourites={state.favourites}
         dispatch={dispatch}
+        onTopicClick={{
+          dispatch: dispatch,
+          type: ACTIONS.GET_PHOTOS_BY_TOPICS,
+        }}
         photoDetails={ACTIONS.SELECT_PHOTO}
         handleFavourites={{
           true: ACTIONS.FAV_PHOTO_ADDED,

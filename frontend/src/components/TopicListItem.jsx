@@ -1,10 +1,16 @@
 import React from "react";
 import "../styles/TopicListItem.scss";
 
-const TopicListItem = (props) => {
+const TopicListItem = ({ topic, onTopicClick }) => {
   return (
     <div className="topic-list__item">
-      <span>{props.topic.title}</span>
+      <span
+        onClick={() =>
+          onTopicClick.dispatch({ type: onTopicClick.type, payload: topic.id })
+        }
+      >
+        {topic.title}
+      </span>
     </div>
   );
 };

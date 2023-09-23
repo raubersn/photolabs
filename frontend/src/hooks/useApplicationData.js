@@ -1,3 +1,5 @@
+import photos from "mocks/photos";
+import { formatWithCursor } from "prettier";
 import React, { useReducer, useEffect } from "react";
 
 export const ACTIONS = {
@@ -6,7 +8,7 @@ export const ACTIONS = {
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
-  DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
+  GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
 const reducers = {
@@ -20,18 +22,16 @@ const reducers = {
     };
   },
   SET_PHOTO_DATA(state, action) {
-    return { ...state, photoData: action.payload };
+    return { ...state, photoData: [...action.payload] };
   },
   SET_TOPIC_DATA(state, action) {
-    return { ...state, topicData: action.payload };
+    return { ...state, topicData: [...action.payload] };
   },
   SELECT_PHOTO(state, action) {
     return { ...state, modalPhoto: action.payload };
   },
-  DISPLAY_PHOTO_DETAILS(state, action) {
-    return {
-      /* insert logic */
-    };
+  GET_PHOTOS_BY_TOPICS(state, action) {
+    return { ...state, filter: action.payload };
   },
 };
 
@@ -44,7 +44,7 @@ export const useApplicationData = (initial) => {
         `Tried to reduce with unsupported action type: ${action.type}`
       );
     }
-  }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null });
+  }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null, filter: null });
 
   useEffect(() => {
     fetch("/api/photos")
@@ -61,6 +61,14 @@ export const useApplicationData = (initial) => {
         dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
       );
   }, []);
+
+  useEffect(() => {
+    fetch(state.filter ? `/api/topics/photos/${state.filter}` : "/api/photos")
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+      );
+  }, [state.filter]);
 
   return { state, dispatch };
 };
