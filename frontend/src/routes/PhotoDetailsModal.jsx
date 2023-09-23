@@ -10,7 +10,7 @@ const PhotoDetailsModal = ({
   photoDetails,
   favourites,
   handleFavourites,
-  dispatch
+  dispatch,
 }) => {
   return (
     <div className="photo-details-modal">
@@ -27,17 +27,24 @@ const PhotoDetailsModal = ({
         handleFavourites={handleFavourites}
         favID={photo.id}
         dispatch={dispatch}
-      />
-      <div>
-        <label className="photo-details-modal__header">Related Photos</label>
-      </div>
-      <PhotoList
-        photos={photo.similar_photos}
-        favourites={favourites}
-        handleFavourites={handleFavourites}
         photoDetails={photoDetails}
-        dispatch={dispatch}
       />
+      {photo.similar_photos && (
+        <>
+          <div>
+            <label className="photo-details-modal__header">
+              Related Photos
+            </label>
+          </div>
+          <PhotoList
+            photos={photo.similar_photos}
+            favourites={favourites}
+            handleFavourites={handleFavourites}
+            photoDetails={photoDetails}
+            dispatch={dispatch}
+          />
+        </>
+      )}
     </div>
   );
 };

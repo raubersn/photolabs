@@ -28,6 +28,7 @@ const reducers = {
     return { ...state, topicData: [...action.payload] };
   },
   SELECT_PHOTO(state, action) {
+    console.log(JSON.stringify(action.payload));
     return { ...state, modalPhoto: action.payload };
   },
   GET_PHOTOS_BY_TOPICS(state, action) {
