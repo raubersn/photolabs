@@ -53,19 +53,15 @@ export const useApplicationData = (initial) => {
   }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null, filter: null });
 
   useEffect(() => {
-    axios
-      .get(END_POINTS.GET_PHOTOS)
-      .then((res) =>
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: res.data })
-      );
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(END_POINTS.GET_TOPICS)
-      .then((res) =>
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: res.data })
-      );
+    Promise.all([
+      axios.get(END_POINTS.GET_PHOTOS),
+      axios.get(END_POINTS.GET_TOPICS),
+    ])
+      .then((res) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: res[0].data });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: res[1].data });
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -77,7 +73,8 @@ export const useApplicationData = (initial) => {
       )
       .then((res) =>
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: res.data })
-      );
+      )
+      .catch((error) => console.log(error));
   }, [state.filter]);
 
   return { state, dispatch };
