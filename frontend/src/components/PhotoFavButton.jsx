@@ -7,6 +7,8 @@ function PhotoFavButton({ selected, favID, handleFavourites, dispatch }) {
     <div
       className={`photo-list__fav-icon`}
       onClick={() =>
+        //If the item is a favourite, the onClick Action will remove the photo from the favourites list.
+        //If the item is not a favourite, the onClick Action will add the photo to the favourites list.
         dispatch({ type: handleFavourites[!selected], payload: favID })
       }
     >

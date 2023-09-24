@@ -17,6 +17,7 @@ const HomeRoute = ({
       <TopNavigation
         onTopicClick={onTopicClick}
         topics={topics}
+        //Verify if there are photos in the favourite array
         isFavPhotoExist={favourites.length > 0}
       />
       <PhotoList

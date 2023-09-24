@@ -14,6 +14,7 @@ const PhotoListItem = ({
 }) => {
   const { urls, user, location } = photo;
 
+  //The style of the PhotoListItem will change if it is shown on the main page or in a modal window
   return (
     <section
       className={modal ? "photo-details-modal__top-bar" : "photo-list__item"}

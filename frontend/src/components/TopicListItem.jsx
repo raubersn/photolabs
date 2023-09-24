@@ -6,6 +6,7 @@ const TopicListItem = ({ topic, onTopicClick }) => {
     <div className="topic-list__item">
       <span
         onClick={() =>
+          //Changes the 'filter' state, setting the Topic ID to filter the displayed photos
           onTopicClick.dispatch({ type: onTopicClick.type, payload: topic.id })
         }
       >

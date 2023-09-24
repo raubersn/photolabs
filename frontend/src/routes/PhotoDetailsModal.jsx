@@ -20,6 +20,7 @@ const PhotoDetailsModal = ({
       >
         <img src={closeSymbol} alt="close symbol" />
       </button>
+      {/*Displays the PhotoListItem component with modal properties*/}
       <PhotoListItem
         modal={true}
         photo={photo}
@@ -29,22 +30,26 @@ const PhotoDetailsModal = ({
         dispatch={dispatch}
         photoDetails={photoDetails}
       />
-      {photo.similar_photos && (
-        <>
-          <div>
-            <label className="photo-details-modal__header">
-              Related Photos
-            </label>
-          </div>
-          <PhotoList
-            photos={photo.similar_photos}
-            favourites={favourites}
-            handleFavourites={handleFavourites}
-            photoDetails={photoDetails}
-            dispatch={dispatch}
-          />
-        </>
-      )}
+      {
+        //If the modal window is showing a photo coming from the Related Photos list, it won't have a cascade Related Photos list.
+        //Therefore, it shouldn't be displayed
+        photo.similar_photos && (
+          <>
+            <div>
+              <label className="photo-details-modal__header">
+                Related Photos
+              </label>
+            </div>
+            <PhotoList
+              photos={photo.similar_photos}
+              favourites={favourites}
+              handleFavourites={handleFavourites}
+              photoDetails={photoDetails}
+              dispatch={dispatch}
+            />
+          </>
+        )
+      }
     </div>
   );
 };
