@@ -13,6 +13,7 @@ const END_POINTS = {
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
   FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
+  GET_FAV_PHOTOS: "GET_FAV_PHOTOS",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
@@ -24,18 +25,38 @@ export const ACTIONS = {
 const reducers = {
   //Adds a photo to the favourites
   FAV_PHOTO_ADDED(state, action) {
-    return { ...state, favourites: [...state.favourites, action.payload] };
+    const updatedFavourites = [...state.favourites, action.payload];
+    const newState = { ...state, favourites: updatedFavourites };
+
+    if (state.favFilter) {
+      return reducers[ACTIONS.SET_PHOTO_DATA](newState, {
+        payload: updatedFavourites,
+      });
+    } else {
+      return newState;
+    }
   },
   //Removes a photo from favourites
   FAV_PHOTO_REMOVED(state, action) {
-    return {
-      ...state,
-      favourites: state.favourites.filter((x) => x !== action.payload),
-    };
+    const updatedFavourites = state.favourites.filter(
+      (x) => x.id !== action.payload.id
+    );
+    const newState = { ...state, favourites: updatedFavourites };
+
+    if (state.favFilter) {
+      return reducers[ACTIONS.SET_PHOTO_DATA](newState, {
+        payload: updatedFavourites,
+      });
+    } else {
+      return newState;
+    }
   },
   //Load the set of photos into the state
   SET_PHOTO_DATA(state, action) {
-    return { ...state, photoData: [...action.payload] };
+    return {
+      ...state,
+      photoData: [...action.payload]
+    };
   },
   //Load the set of topics into the state
   SET_TOPIC_DATA(state, action) {
@@ -48,6 +69,10 @@ const reducers = {
   //Sets the selected topic as a filter to the photos
   GET_PHOTOS_BY_TOPICS(state, action) {
     return { ...state, filter: action.payload };
+  },
+  //Sets if the favourite photos are displayed
+  GET_FAV_PHOTOS(state, action) {
+    return { ...state, favFilter: action.payload };
   },
 };
 
@@ -64,7 +89,7 @@ export const useApplicationData = (initial) => {
       );
     }
     //if an initial state is passed as a parameter, it will be used. If not, the object is mounted with the required keys
-  }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null, filter: null });
+  }, initial || { photoData: [], topicData: [], favourites: [], modalPhoto: null, filter: null, favFilter: false });
 
   //After the virtual DOM is mounted for the first time, loads the all the photos and topics
   useEffect(() => {

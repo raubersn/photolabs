@@ -2,14 +2,14 @@ import React, { useCallback, useState } from "react";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-function PhotoFavButton({ selected, favID, handleFavourites, dispatch }) {
+function PhotoFavButton({ selected, photo, handleFavourites, dispatch }) {
   return (
     <div
       className={`photo-list__fav-icon`}
       onClick={() =>
         //If the item is a favourite, the onClick Action will remove the photo from the favourites list.
         //If the item is not a favourite, the onClick Action will add the photo to the favourites list.
-        dispatch({ type: handleFavourites[!selected], payload: favID })
+        dispatch({ type: handleFavourites[!selected], payload: photo })
       }
     >
       <div className="photo-list__fav-icon-svg">

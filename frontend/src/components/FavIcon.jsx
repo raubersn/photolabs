@@ -1,13 +1,14 @@
 import React from "react";
 import "../styles/FavIcon.scss";
 
-const FavIcon = ({ displayAlert, selected, className }) => {
+const FavIcon = ({ displayAlert, selected, className, onFavouritesClick }) => {
   return (
     <svg
       className={className}
       viewBox="0 0 24 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onFavouritesClick}
     >
       <path
         fill={selected ? "#C80000" : "#EEEEEE"}

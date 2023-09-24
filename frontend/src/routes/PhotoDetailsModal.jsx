@@ -24,7 +24,7 @@ const PhotoDetailsModal = ({
       <PhotoListItem
         modal={true}
         photo={photo}
-        selected={favourites.filter((x) => x === photo.id).length > 0}
+        selected={favourites.filter((x) => x.id === photo.id).length > 0}
         handleFavourites={handleFavourites}
         favID={photo.id}
         dispatch={dispatch}

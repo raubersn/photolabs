@@ -11,6 +11,7 @@ const HomeRoute = ({
   handleFavourites,
   dispatch,
   onTopicClick,
+  onFavouritesClick
 }) => {
   return (
     <div className="home-route">
@@ -19,6 +20,7 @@ const HomeRoute = ({
         topics={topics}
         //Verify if there are photos in the favourite array
         isFavPhotoExist={favourites.length > 0}
+        onFavouritesClick={onFavouritesClick}
       />
       <PhotoList
         photos={photos}

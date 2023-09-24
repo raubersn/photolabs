@@ -18,13 +18,18 @@ const App = () => {
         //Passes the dispatch again inside an object so it can be called with the type as a parameter along the appropriate payload
         onTopicClick={{
           dispatch: dispatch,
-          type: ACTIONS.GET_PHOTOS_BY_TOPICS,
+          topicType: ACTIONS.GET_PHOTOS_BY_TOPICS,
+          favType: ACTIONS.GET_FAV_PHOTOS,
         }}
         photoDetails={ACTIONS.SELECT_PHOTO}
         //Depending on the value of Selected, the action to add or remove the photo from favourites will be called
         handleFavourites={{
           true: ACTIONS.FAV_PHOTO_ADDED,
           false: ACTIONS.FAV_PHOTO_REMOVED,
+        }}
+        onFavouritesClick={() => {
+          dispatch({ type: ACTIONS.GET_FAV_PHOTOS , payload: true });
+          dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: state.favourites});
         }}
       />
       {

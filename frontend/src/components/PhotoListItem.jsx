@@ -6,7 +6,6 @@ import "../styles/PhotoDetailsModal.scss";
 const PhotoListItem = ({
   photo,
   selected,
-  favID,
   handleFavourites,
   photoDetails,
   modal,
@@ -23,7 +22,7 @@ const PhotoListItem = ({
         <div>
           <PhotoFavButton
             selected={selected}
-            favID={favID}
+            photo={photo}
             handleFavourites={handleFavourites}
             dispatch={dispatch}
           />
